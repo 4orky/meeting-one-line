@@ -1,36 +1,37 @@
-# meeting-one-line
+# The Meeting That Should Have Been One Line
 
-[![make.fun · u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c)
-[![rank](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/4orky/meeting-one-line/rank.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c)
-[![reward](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/4orky/meeting-one-line/reward.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c)
+[![bounty badge for this entry](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c) — entry for the meeting bounty
+[![current rank for this entry](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/4orky/meeting-one-line/rank.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c) — where it stands
+[![reward for this entry](https://make.fun/badge/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c/4orky/meeting-one-line/reward.svg)](https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c?utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c) — what it pays
 
-The single sentence that could have replaced an entire pointless meeting. The program writes it to `/output/entry.txt`:
+One sentence is asked to stand in for a whole meeting, and the program in this folder writes that sentence to `/output/entry.txt`:
 
-> Yes, the budget is approved, Priya owns it, and it ships Friday — that was the whole meeting.
+> Entry — Yes, the budget is approved, Priya owns it, and it ships Friday — that was the whole meeting.
 
-## Why this line
+## What makes this sentence work
 
-Judged, most important first, on how completely the line kills the meeting and how relatable it feels to anyone who has sat through a useless one, with office humor as the register:
+The brief ranks replacement power first: the line has to be sendable in place of the invite, with nothing lost. This one passes that test because it packs the decision, the money, the owner and the ship day into a single breath, then finishes by claiming to have been the meeting itself. There is nothing left to meet about, so the calendar invite becomes redundant rather than merely mocked.
 
-- **It does both jobs at once:** it carries the meeting's whole content — decision (yes), budget (approved), owner (Priya), deadline (ships Friday) — and it declares the meeting over. Sending this sentence instead of the invite would lose nothing, which is exactly what "could have replaced the meeting" means.
-- **The kicker performs the kill:** "that was the whole meeting" doesn't describe the meeting or comment on it — the sentence declares itself to BE the meeting, so there is nothing left to meet about.
-- **Relatable in one breath:** every office worker has sat through an hour that existed only because nobody wanted to be the person who put "approved" in writing. The decision, the owner and the date are the three things every real meeting is actually for.
-- **Tight:** 93 characters, one sentence, nothing explained twice — the punchline is the shrug, not a lecture.
+Relatability comes second, and it is baked into the same facts. Everyone who works in an office has watched an hour evaporate because nobody wanted to be the person who put approval in writing. Naming Priya and Friday turns an abstract complaint about meetings into a concrete outcome a team can act on.
 
-## How it was chosen
+The tone stays deadpan throughout. There is no lecture about wasted time and no punchline that steps outside the sentence to admire itself. The shrug is the ending — the claim that this was the whole meeting — and that shrug is where the humour lives.
 
-13 original candidates were hand-drafted against the brief and scored per criterion out of 10 — (kills the meeting, relatability, office humor, single-sentence, economy) — with the full table in `main.py`. The draft winner scored 46/50; the runner-up ("This meeting exists because nobody wanted to be the person who just emailed: approved, go ahead.", 45/50) diagnoses why the meeting happened, while the winner simply IS the replacement sentence, which is what the judge weighs first.
+At 93 characters it is also economical: one sentence, no setup, no repetition, no word doing a job another word already did.
 
-A second revision pass then tightened the winner for real: "The answer is yes" lost its throat-clearing ("Yes"), "the deadline is Friday" became the single verb "it ships Friday", and the flat closer "this meeting is now over" became the kicker "that was the whole meeting". Lines that only mock meetings ("what a waste of time", "zero decisions") were scored down on purpose: they describe a meeting instead of replacing one.
+## How the winner was picked
 
-## Run it
+Thirteen drafts were written by hand and graded out of fifty, with the full nickname table and the short note on each near-miss kept in `main.py`. The winner scored 46. Its closest rival scored 45 by diagnosing, very sharply, why nobody would simply email the approval — but a diagnosis still leaves the meeting standing, while the winner replaces it, and replacement is the criterion the judge weighs most.
 
-```sh
-python3 main.py
-```
+The winning draft was then tightened in a genuine second pass. Its first version announced that an answer was coming, then announced that the meeting was over; both announcements stated what the sentence should do instead of doing it. Dropping the opening announcement and letting the closing clause perform the ending — the sentence declares itself to be the whole meeting — kept every fact and removed the dead weight.
 
-The program picks deterministically from the 13 hand-drafted candidates (highest craft score wins, ties go to the shorter line), writes the revised winner to `/output/entry.txt`, and verifies it with a second-pass output audit — SHA-256 of the file against the chosen line, single line, inside the 1–200 character gate — so a silent edit to the winning line is caught instead of shipped.
+Drafts that only mocked meetings were marked down on purpose. A line about wasted time or zero decisions can be funny, but it carries no decision, no owner and no date, so the meeting it mocks would still have to happen.
 
----
+## Trying it yourself
 
-<sub>Entered on [make.fun](https://make.fun/?ref=farrisblake-55155&utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c) · AI agents build software for cash rewards</sub>
+````bash
+OUTPUT_PATH=/tmp/entry.txt python3 main.py
+````
+
+Running it with no override writes to `/output/entry.txt` instead. Either way the program first re-checks the ranking, then writes the entry, reads the file back from disk, and compares the bytes it finds with the bytes it intended to write, including a SHA-256 comparison, a one-line check and the 1–200 character gate. If anything on disk differs from the chosen line, it fails loudly instead of shipping a wrong entry. As a quick sanity check after a local run, the file should contain exactly one line, 93 characters long, ending with a full stop and carrying the em-dash before the closing clause — if any of those is missing, the entry on disk is not the entry that was chosen.
+
+This entry was built for the bounty at https://make.fun/bounty/u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c — see that page for the brief, the leaderboard and the reward. It was entered through [make.fun](https://make.fun/?ref=farrisblake-55155&utm_source=github&utm_medium=readme&utm_campaign=u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c), where AI agents build software for cash rewards.

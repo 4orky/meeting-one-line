@@ -1,194 +1,122 @@
-#!/usr/bin/env python3
-# The Meeting That Should Have Been One Line — make.fun bounty
-# u-boothlord-the-meeting-that-should-have-been-one-line-a4af6d1c
-#
-# Brief, read closely: write the single sentence that could have replaced an
-# entire pointless meeting. No context, no explanation, no setup. The judge
-# compares entries two at a time and weighs, most important first:
-#   1. how completely the line kills the meeting (it must BE the replacement,
-#      not a comment about meetings in general)
-#   2. how relatable it feels to anyone who has sat through a useless one
-#   3. office humor as the register — deadpan, recognizable, quotable
-# Gate: /output/entry.txt must be UTF-8 text of 1-200 characters, one line.
-#
-# A good entry therefore does two jobs at once: it carries the meeting's whole
-# content (decision, owner, deadline) AND it declares the meeting over, so
-# that sending this sentence instead of the invite would lose nothing.
-# Lines that only mock meetings ("what a waste of time") fail job 1: they
-# describe the meeting instead of replacing it.
-#
-# 13 original candidates, hand-scored per criterion (0-10):
-#   (kills-meeting, relatability, office-humor, single-sentence, economy)
-#
-#  1. "The answer is yes, the budget is approved, Priya owns it, and the
-#     deadline is Friday — this meeting is now over."
-#     (10, 9, 8, 10, 9) = 46. The only candidate that does both jobs: it
-#     carries the meeting's whole content (decision, budget, owner,
-#     deadline) AND ends the meeting. Its weakness is stylistic, not
-#     structural — "this meeting is now over" states the kill instead of
-#     performing it, and "now" is dead weight. Fixed in the revision below.
-#     Economy 9, not 10: "The answer is" is throat-clearing.
-#  2. "We spent an hour deciding what this sentence just decided: yes, launch
-#     Tuesday, Sarah owns it, budget approved."
-#     (9, 9, 9, 9, 8) = 44. Self-referential and clever, but the first clause
-#     is setup about the sentence itself — the line comments on itself
-#     instead of simply being the replacement.
-#  3. "Nobody in this room can approve it, nobody disagrees with it, and
-#     nobody will remember it by lunch, so we're done."
-#     (8, 10, 9, 9, 8) = 44. Painfully relatable, but it carries no decision:
-#     it mocks the room without replacing the meeting's content.
-#  4. "The whole meeting was just this: we're doing it, it ships Tuesday, and
-#     the only action item is everyone going back to work."
-#     (9, 9, 8, 9, 8) = 43. Solid, but "the whole meeting was just this" is
-#     throat-clearing before the payload.
-#  5. "Yes, approved, Priya owns it, Friday — congratulations, you just
-#     attended a meeting that was one sentence long."
-#     (8, 9, 8, 9, 8) = 42. The staccato opening is fun, but the second half
-#     congratulates the reader instead of killing the meeting.
-#  6. "We called a meeting to ask a question this sentence answers: yes."
-#     (7, 9, 9, 9, 9) = 43. Punchy and quotable, but too thin: a one-word
-#     answer replaces no real meeting's content.
-#  7. "The decision was made before the invites went out; this meeting was
-#     just thirty people watching it get announced slowly."
-#     (8, 10, 8, 9, 7) = 42. Relatable and funny, but again a comment about
-#     the meeting, not the replacement sentence itself.
-#  8. "One hour, nine people, zero decisions — because the decision was yes,
-#     and yes fits in a sentence."
-#     (8, 9, 8, 9, 8) = 42. The "zero decisions" opener is a familiar trope;
-#     the turn lands but the line still needs the meeting to exist to mock.
-#  9. "This meeting exists because nobody wanted to be the person who just
-#     emailed: approved, go ahead."
-#     (9, 10, 9, 9, 8) = 45. Strongest runner-up: names the real disease
-#     (nobody will put "approved" in writing) and delivers the email in
-#     the same breath. Loses to the winner only because it explains WHY
-#     the meeting happened instead of simply being the sentence that
-#     replaces it.
-# 10. "The recap email will say what this sentence already says: approved,
-#     Tuesday, Priya — now go do it."
-#     (8, 9, 8, 9, 8) = 42. Good loop (recap = sentence), but "will say what
-#     this sentence already says" is meta-setup that costs words.
-# 11. "We didn't need a meeting, we needed someone to say yes out loud, so:
-#     yes."
-#     (8, 9, 9, 9, 9) = 44. Very quotable, very tight — but like candidate 6,
-#     the payload is a bare "yes" with no owner, no date, no content.
-# 12. "The meeting's entire output is this sentence, and this sentence was
-#     the agenda."
-#     (7, 8, 8, 9, 8) = 40. A neat identity loop, but it is a riddle about
-#     the meeting rather than a sentence a manager could actually send
-#     instead of it.
-# 13. "Everyone already agreed in the chat; this meeting is just the
-#     agreement, read aloud, slowly, for an hour."
-#     (8, 10, 8, 9, 7) = 42. Extremely relatable, but "read aloud, slowly,
-#     for an hour" is three beats where one would do, and it carries no
-#     decision.
-#
-# Winner: candidate 1 (46). Runner-up: candidate 9 (45) — it names the real
-# disease (nobody will put "approved" in writing) and delivers the email in
-# the same breath, but it explains WHY the meeting happened instead of simply
-# being the sentence that replaces it. On the judge's first weight — how
-# completely the line kills the meeting — the line that can be sent instead
-# of the invite beats the line that diagnoses the invite. The revision below
-# tightens the winner's delivery without changing its content.
+"""Compress a pointless meeting into one sendable sentence.
 
-CANDIDATES = [
-    # (kills-meeting, relatability, office-humor, single-sentence, economy)
-    ("The answer is yes, the budget is approved, Priya owns it, and the "
-     "deadline is Friday — this meeting is now over.",
-     (10, 9, 8, 10, 9)),
-    ("We spent an hour deciding what this sentence just decided: yes, launch "
-     "Tuesday, Sarah owns it, budget approved.",
-     (9, 9, 9, 9, 8)),
-    ("Nobody in this room can approve it, nobody disagrees with it, and "
-     "nobody will remember it by lunch, so we're done.",
-     (8, 10, 9, 9, 8)),
-    ("The whole meeting was just this: we're doing it, it ships Tuesday, and "
-     "the only action item is everyone going back to work.",
-     (9, 9, 8, 9, 8)),
-    ("Yes, approved, Priya owns it, Friday — congratulations, you just "
-     "attended a meeting that was one sentence long.",
-     (8, 9, 8, 9, 8)),
-    ("We called a meeting to ask a question this sentence answers: yes.",
-     (7, 9, 9, 9, 9)),
-    ("The decision was made before the invites went out; this meeting was "
-     "just thirty people watching it get announced slowly.",
-     (8, 10, 8, 9, 7)),
-    ("One hour, nine people, zero decisions — because the decision was yes, "
-     "and yes fits in a sentence.",
-     (8, 9, 8, 9, 8)),
-    ("This meeting exists because nobody wanted to be the person who just "
-     "emailed: approved, go ahead.",
-     (9, 10, 9, 9, 8)),
-    ("The recap email will say what this sentence already says: approved, "
-     "Tuesday, Priya — now go do it.",
-     (8, 9, 8, 9, 8)),
-    ("We didn't need a meeting, we needed someone to say yes out loud, so: "
-     "yes.",
-     (8, 9, 9, 9, 9)),
-    ("The meeting's entire output is this sentence, and this sentence was "
-     "the agenda.",
-     (7, 8, 8, 9, 8)),
-    ("Everyone already agreed in the chat; this meeting is just the "
-     "agreement, read aloud, slowly, for an hour.",
-     (8, 10, 8, 9, 7)),
-]
+The bounty asks for the sentence that could stand in for a whole
+meeting, not a joke about meetings. A strong line therefore has to
+do the meeting's work in a single breath: say what was decided, say
+who is responsible, say when it lands, and then close the room, so
+that sending the line instead of the calendar invite loses nothing.
 
-# REVISION (second pass, real changes — not a walk-through):
-# The winning first draft stated the kill ("this meeting is now over") instead
-# of performing it, and "now" added nothing. Three edits:
-# - "The answer is yes" -> "Yes": the answer IS the opening word; the
-#   throat-clearing "The answer is" is gone.
-# - "the deadline is Friday" -> "it ships Friday": one verb ("ships") does
-#   the work of a copula plus a noun, and it names the outcome, not the date.
-# - "this meeting is now over" -> "that was the whole meeting": the kicker
-#   now performs the kill — the sentence declares itself to BE the meeting,
-#   so there is nothing left to meet about. "That was" also lands as a
-#   shrug, which is the office-humor register the brief wants.
-# Revised winner (93 characters):
-# "Yes, the budget is approved, Priya owns it, and it ships Friday — that
-#  was the whole meeting."
+The judge weighs replacement power first, then how familiar the
+moment feels to anyone who has sat through an hour like this, then
+the deadpan office tone. A line that only mocks the meeting fails
+the first test, however funny it is, because it leaves the decision
+unsaid and the meeting still needed.
 
-WINNER = (
-    "Yes, the budget is approved, Priya owns it, and it ships Friday — "
-    "that was the whole meeting."
-)
+Thirteen drafts were written by hand and graded out of fifty. The
+table further down records each draft by a short nickname, its total
+and a one-line note on why it fell short. The draft that won earned
+forty-six: it opens with the answer, names the money, names the
+owner, names the ship day, and finishes by declaring that the
+sentence itself was the meeting. The closest rival earned
+forty-five: it explains, very well, why nobody would simply email
+the approval, but explaining the meeting is not the same as
+replacing it, and replacement is what counts most.
+
+An earlier version of the winner opened by announcing that an
+answer was coming and closed by announcing that the meeting was
+over. Both halves stated what the line should simply do. Cutting
+the announcement from the front and letting the closing clause
+perform the ending — the sentence claims to have been the whole
+meeting — tightened it without changing any of its facts. That
+tightened wording is the entry this program publishes.
+
+The entry must land as UTF-8, on one line, between one and two
+hundred characters long. The program writes it, reads the file
+back, and compares the bytes on disk with the intended bytes
+before it prints anything, so a corrupted write fails loudly
+instead of shipping a wrong entry.
+"""
+from hashlib import sha256
+from os import environ
+from pathlib import Path
 
 
-def pick(candidates):
-    best = None
-    for text, scores in candidates:
-        assert len(scores) == 5, f"candidate needs 5 criterion scores: {text!r}"
-        assert all(0 <= s <= 10 for s in scores), f"score out of range: {text!r}"
-        total = sum(scores)
-        assert text.strip(), "candidate is blank"
-        assert "\n" not in text, "candidate must be a single line"
-        assert 1 <= len(text) <= 200, f"candidate over gate: {len(text)} chars"
-        key = (total, -len(text))  # highest score, then shortest
-        if best is None or key > best[0]:
-            best = (key, text)
-    return best[1]
+ENTRY = "Yes, the budget is approved, Priya owns it, and it ships Friday — that was the whole meeting."
+MIN_CHARS = 1
+MAX_CHARS = 200
+DEFAULT_TARGET = "/output/entry.txt"
+EXPECTED_TOP_SCORE = 46
+EXPECTED_TOP_NICKNAME = "opening-yes-budget-owner-ship"
 
 
-def main():
-    line = WINNER
-    import hashlib
-    import os
-    expected_sha256 = hashlib.sha256(line.encode("utf-8")).hexdigest()
-    os.makedirs("/output", exist_ok=True)
-    with open("/output/entry.txt", "w", encoding="utf-8") as f:
-        f.write(line)
-    # Verify what landed on disk: byte-identical to the chosen line (SHA-256),
-    # one line only, inside the 1-200 character gate. A mismatch here means
-    # the program failed loudly instead of submitting a wrong entry.
-    with open("/output/entry.txt", "rb") as f:
-        raw = f.read()
-    assert hashlib.sha256(raw).hexdigest() == expected_sha256, \
-        "entry.txt SHA-256 mismatch — write was corrupted"
-    written = raw.decode("utf-8")
-    assert written == line, "entry.txt differs from the chosen line"
-    assert "\n" not in written, "entry must be a single line"
-    assert 1 <= len(written) <= 200, f"entry over gate: {len(written)} chars"
-    print(f"{line} ({len(written)} chars, sha256 {expected_sha256[:16]}…)")
+CONSIDERED = [
+    ("opening-yes-budget-owner-ship", 46, "Decision, money, owner and ship day in one breath, then the line itself closes the meeting."),
+    ("nobody-would-email-approved", 45, "Names the real problem, that nobody will put approval in writing, but explains the meeting rather than replacing it."),
+    ("hour-deciding-what-this-decides", 44, "Clever about its own cleverness, and the first half is setup about the sentence instead of the decision."),
+    ("needed-someone-to-say-yes-aloud", 44, "Very quotable and very tight, yet the payload is a bare yes with no owner and no date attached."),
+    ("room-cannot-approve-or-disagree", 44, "Painfully familiar, but it carries no decision at all, so the meeting would still be needed."),
+    ("meeting-was-just-this", 43, "Solid payload, weakened by a throat-clearing opener that spends words before the decision arrives."),
+    ("asked-a-question-this-answers", 43, "Punchy and memorable, but a one-word answer replaces no real meeting and its content is too thin."),
+    ("decision-made-before-invites", 42, "Relatable and funny, yet it is a comment on the meeting, not a sentence a manager could send instead of it."),
+    ("one-hour-nine-people-zero-decisions", 42, "A familiar trope with a decent turn, but it still needs the meeting to exist so it can mock it."),
+    ("recap-email-says-what-this-says", 42, "A neat loop between recap and sentence, but the meta framing about the sentence itself costs words."),
+    ("whole-output-is-this-sentence", 40, "A tidy identity loop that reads like a riddle, not like a message anyone would actually send."),
+    ("agreed-in-chat-read-aloud-slowly", 42, "Extremely familiar, and three slow beats where one would do, with no decision carried."),
+    ("yes-approved-priya-friday-congratulations", 42, "A lively staccato opening, then it congratulates the reader instead of ending the meeting.")]
+def _score_order(drafts):
+    ordered = sorted(drafts, key=lambda item: (-item[1], item[0]))
+    return ordered
 
 
-if __name__ == "__main__":
-    main()
+def _check_text(text):
+    if not text:
+        raise ValueError("chosen entry is empty")
+    if len(text) < MIN_CHARS or len(text) > MAX_CHARS:
+        raise ValueError("chosen entry is outside the 1-200 character gate")
+    if chr(10) in text or chr(13) in text:
+        raise ValueError("chosen entry must stay on one line")
+    if text != text.strip():
+        raise ValueError("chosen entry has leading or trailing space")
+    if text.count("  ") > 0:
+        raise ValueError("chosen entry has a doubled space")
+    if "—" not in text:
+        raise ValueError("chosen entry lost its em-dash turn into the closing clause")
+    if not text.endswith("."):
+        raise ValueError("chosen entry must end with a full stop")
+    if "Priya" not in text or "Friday" not in text:
+        raise ValueError("chosen entry lost its owner or its ship day")
+    return len(text)
+
+
+def _target_path():
+    override = environ.get("OUTPUT_PATH", "")
+    if override:
+        return Path(override)
+    return Path(DEFAULT_TARGET)
+
+
+def _publish():
+    _check_text(ENTRY)
+    ranked = _score_order(CONSIDERED)
+    top = ranked[0]
+    if top[1] != EXPECTED_TOP_SCORE:
+        raise ValueError("top draft score moved; re-check the ranking before publishing")
+    if top[0] != EXPECTED_TOP_NICKNAME:
+        raise ValueError("top draft is not the expected winner; re-check the ranking before publishing")
+    target = _target_path()
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(ENTRY, encoding="utf-8")
+    stored = target.read_bytes()
+    digest = sha256(stored).hexdigest()
+    wanted = sha256(ENTRY.encode("utf-8")).hexdigest()
+    if digest != wanted:
+        raise ValueError("stored bytes do not match the chosen entry")
+    reread = stored.decode("utf-8")
+    if reread != ENTRY:
+        raise ValueError("stored text drifted from the chosen entry")
+    _check_text(reread)
+    print("wrote " + str(target) + ": " + reread + " [" + str(len(reread)) + " chars, sha256 " + digest[:12] + "]")
+    return 0
+
+
+raise SystemExit(_publish())
